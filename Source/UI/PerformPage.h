@@ -95,7 +95,6 @@ namespace UI
             // Left column
             auto left = b.removeFromLeft (colW);
             left.reduce (padX, padY);
-            const float knobAreaH = 62.0f;
             int k = 0;
             for (auto& knob : knobs)
             {
@@ -106,7 +105,6 @@ namespace UI
             }
 
             // Label row under knobs
-            const float labelsY = left.getY() + 40.0f;
 
             // XA control row
             const float xaY = left.getY() + 170.0f;

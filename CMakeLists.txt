@@ -27,10 +27,17 @@ else()
     FetchContent_MakeAvailable(JUCE)
 endif()
 
+include(FetchContent)
+FetchContent_Declare(melatonin_inspector
+    GIT_REPOSITORY https://github.com/sudara/melatonin_inspector.git
+    GIT_TAG 9c483f865854d83fe9873e1c20e3fd772f695f80
+)
+FetchContent_MakeAvailable(melatonin_inspector)
+
 # ── Plugin target ───────────────────────────────────────────────────────
 juce_add_plugin(EONisya
     # ── Identification ──
-    PLUGIN_MANUFACTURER_CODE  Eons
+    PLUGIN_MANUFACTURER_CODE  EEFL
     PLUGIN_CODE               Eon6
 
     # ── Plugin formats (macOS & Windows) ──
@@ -41,14 +48,14 @@ juce_add_plugin(EONisya
     DESCRIPTION               "EON MOTIF6 music production synthesizer (VSTi)"
 
     # ── Company info ──
-    COMPANY_NAME              "EON Audio Systems"
+    COMPANY_NAME              "EEF LABs"
     COMPANY_WEBSITE           "https://eonaudio.systems"
     COMPANY_EMAIL             "dev@eonaudio.systems"
-    COMPANY_COPYRIGHT         "Copyright (c) 2026 EON Audio Systems"
+    COMPANY_COPYRIGHT         "Copyright (c) 2026 EEF LABs"
 
     # ── Bundle identifiers ──
-    BUNDLE_ID                 com.eonaudio.eonismotif6
-    PLUGIN_MANUFACTURER       "EON Audio Systems"
+    BUNDLE_ID                 com.eeflabs.eonismotif6
+    PLUGIN_MANUFACTURER       "EEF LABs"
     RESPONSE_LIMIT            1024
 
     # ── AU compat ──
@@ -82,6 +89,12 @@ target_link_libraries(EONisya PUBLIC
     juce::juce_recommended_config_flags
     juce::juce_recommended_lto_flags
     juce::juce_recommended_warning_flags
+)
+target_link_libraries(EONisya PUBLIC
+    "$<$<CONFIG:Debug>:melatonin_inspector>"
+)
+target_compile_definitions(EONisya PUBLIC
+    "$<$<CONFIG:Debug>:MELATONIN_INSPECTOR_ENABLED=1>"
 )
 
 # ── OS-specific ──────────────────────────────────────────────────────────

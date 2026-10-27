@@ -99,7 +99,7 @@ void EONisyaAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 
     juce::dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
-    spec.maximumBlockSize = juce::jmax (1, samplesPerBlock);
+    spec.maximumBlockSize = static_cast<juce::uint32> (juce::jmax (1, samplesPerBlock));
     spec.numChannels = 2;
     reverb.prepare (spec);
     reverbReady = true;
@@ -157,11 +157,9 @@ void EONisyaAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     buffer.clear();
 
     // Allocate / release voices from MIDI
-    juce::MidiBuffer::Iterator midiIt (midiMessages);
-    juce::MidiMessage msg;
-    int midiPos = 0;
-    while (midiIt.getNextEvent (msg, midiPos))
+    for (const auto& event : midiMessages)
     {
+        const auto& msg = event.getMessage();
         if (msg.isNoteOn())
         {
             Voice* slot = nullptr;

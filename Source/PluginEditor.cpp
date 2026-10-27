@@ -1,5 +1,9 @@
 #include "PluginProcessor.h"
 
+#if defined(MELATONIN_INSPECTOR_ENABLED)
+#include <melatonin_inspector/melatonin_inspector.h>
+#endif
+
 #include "UI/HeaderStrip.h"
 #include "UI/LCDPanel.h"
 #include "UI/MixingPage.h"
@@ -99,6 +103,10 @@ private:
     std::unique_ptr<UI::VoiceEditPage> voiceEditPage;
     std::unique_ptr<UI::MixingPage> mixingPage;
     std::unique_ptr<UI::LCDPanel> placeholderLcd;
+
+#if defined(MELATONIN_INSPECTOR_ENABLED)
+    melatonin::Inspector inspector { *this, false };
+#endif
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (EONisyaAudioProcessorEditor)
 };

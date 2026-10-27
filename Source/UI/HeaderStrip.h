@@ -19,7 +19,7 @@ namespace UI
             {
                 tabs[i] = std::make_unique<UI::TextButton> (
                     juce::StringArray ("PERFORM", "VOICE", "MIXING", "SONG", "PATTERN")[i],
-                    [this, i, onMode] { if (onMode) onMode (i); },
+                    [i, onMode] { if (onMode) onMode (i); },
                     i == currentMode);
                 addAndMakeVisible (*tabs[i]);
             }
