@@ -31,6 +31,7 @@ include(FetchContent)
 FetchContent_Declare(melatonin_inspector
     GIT_REPOSITORY https://github.com/sudara/melatonin_inspector.git
     GIT_TAG 9c483f865854d83fe9873e1c20e3fd772f695f80
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/_deps/melatonin_inspector"
 )
 FetchContent_MakeAvailable(melatonin_inspector)
 
