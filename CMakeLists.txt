@@ -62,6 +62,8 @@ juce_add_plugin(EONisya
     # ── AU compat ──
     AU_MAIN_TYPE              kAudioUnitType_MusicDevice
     AU_SANDBOX_SAFE           YES
+    IS_SYNTH                  TRUE
+    NEEDS_MIDI_INPUT          TRUE
 )
 
 # ── Sources ──────────────────────────────────────────────────────────────
